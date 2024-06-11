@@ -10,10 +10,10 @@ from PIL import Image, ImageDraw
 
 # Define the provinces and their positions
 provinces = {
-    "A1": (0, 0), "A2": (1, 0), "A3": (2, 0), "A4": (3, 0),
-    "B1": (0, 1), "B2": (1, 1), "B3": (2, 1), "B4": (3, 1),
-    "C1": (0, 2), "C2": (1, 2), "C3": (2, 2), "C4": (3, 2),
-    "D1": (0, 3), "D2": (1, 3), "D3": (2, 3), "D4": (3, 3),
+    "LaiChau": (0, 0), "DienBien": (1, 0), "SonLa": (2, 0), "HoaBinh": (3, 0),
+    "HaNoi": (0, 1), "HaiPhong": (1, 1), "QuangNinh": (2, 1), "LangSon": (3, 1),
+    "BacKan": (0, 2), "ThaiNguyen": (1, 2), "PhuTho": (2, 2), "YenBai": (3, 2),
+    "LaoCai": (0, 3), "TuyenQuang": (1, 3), "HaGiang": (2, 3), "VinhPhuc": (3, 3),
 }
 
 # Define the size of each cell
@@ -21,13 +21,22 @@ cell_size = 100
 
 # Define adjacency constraints
 adjacencies = [
-    ("A1", "A2"), ("A2", "A3"), ("A3", "A4"),
-    ("B1", "B2"), ("B2", "B3"), ("B3", "B4"),
-    ("C1", "C2"), ("C2", "C3"), ("C3", "C4"),
-    ("D1", "D2"), ("D2", "D3"), ("D3", "D4"),
-    ("A1", "B1"), ("A2", "B2"), ("A3", "B3"), ("A4", "B4"),
-    ("B1", "C1"), ("B2", "C2"), ("B3", "C3"), ("B4", "C4"),
-    ("C1", "D1"), ("C2", "D2"), ("C3", "D3"), ("C4", "D4"),
+    ("LaiChau", "DienBien"), ("LaiChau", "SonLa"),
+    ("DienBien", "SonLa"),
+    ("SonLa", "HoaBinh"), ("SonLa", "LaiChau"), ("SonLa", "DienBien"),
+    ("HoaBinh", "HaNoi"), ("HoaBinh", "SonLa"),
+    ("HaNoi", "HoaBinh"), ("HaNoi", "HaiPhong"), ("HaNoi", "ThaiNguyen"),
+    ("HaiPhong", "HaNoi"), ("HaiPhong", "QuangNinh"),
+    ("QuangNinh", "HaiPhong"), ("QuangNinh", "LangSon"),
+    ("LangSon", "QuangNinh"), ("LangSon", "BacKan"),
+    ("BacKan", "LangSon"), ("BacKan", "ThaiNguyen"),
+    ("ThaiNguyen", "BacKan"), ("ThaiNguyen", "HaNoi"),
+    ("PhuTho", "ThaiNguyen"), ("PhuTho", "YenBai"),
+    ("YenBai", "PhuTho"), ("YenBai", "LaoCai"),
+    ("LaoCai", "YenBai"), ("LaoCai", "TuyenQuang"),
+    ("TuyenQuang", "LaoCai"), ("TuyenQuang", "HaGiang"),
+    ("HaGiang", "TuyenQuang"), ("HaGiang", "VinhPhuc"),
+    ("VinhPhuc", "HaGiang"), ("VinhPhuc", "LangSon")
 ]
 
 # Initialize the colors for the provinces
